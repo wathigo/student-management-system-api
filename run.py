@@ -1,9 +1,11 @@
 import os
 import unittest
-
+from flask_script import Manager
 
 from app import create_app, db
 
+app = create_app("dev")
+manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
 @manager.command
