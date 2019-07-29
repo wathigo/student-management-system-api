@@ -10,11 +10,10 @@ flask_bcrypt = Bcrypt()
 
 from .api.v1 import version_one as v1
 
-def create_app(name_config):
+def create_app(name_config = "dev"):
     app = Flask(__name__)
-    print(name_config)
     app.register_blueprint(v1)
-    app.config.from_object(config_by_name["dev"])
+    app.config.from_object(config_by_name[name_config])
     app.app_context().push()
     migrate = Migrate(app, db)
     db.init_app(app)
